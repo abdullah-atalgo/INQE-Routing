@@ -24,7 +24,7 @@ const styles: { [k: string]: React.CSSProperties } = {
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    // gap: '0.5rem',
   },
   logo: {
     fontSize: '1.125rem',
@@ -48,7 +48,11 @@ const styles: { [k: string]: React.CSSProperties } = {
     boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.03)',
   },
   contentWrap: {
-    flex: 1,
+    /* use flex to let main content take remaining space next to sidebar */
+    flex: 2,
+    /* ensure main content is offset when sidebar is positioned out of flow (e.g. fixed)
+       so the sidebar does not overlap the main area */
+    marginLeft: (sidebarWidth/2)-20,
     padding: '1rem',
     boxSizing: 'border-box',
     overflow: 'auto',
@@ -63,18 +67,18 @@ const styles: { [k: string]: React.CSSProperties } = {
   },
 };
 
-const NavItem: React.FC<{ to: string; label: string }> = ({ to, label }) => (
-  <NavLink
-    to={to}
-    style={({ isActive }) => ({
-      ...styles.link,
-      ...(isActive ? styles.activeLink : {}),
-      color: isActive ? '#fff' : '#d1d5db',
-    })}
-  >
-    {label}
-  </NavLink>
-);
+// const NavItem: React.FC<{ to: string; label: string }> = ({ to, label }) => (
+//   <NavLink
+//     to={to}
+//     style={({ isActive }) => ({
+//       ...styles.link,
+//       ...(isActive ? styles.activeLink : {}),
+//       color: isActive ? '#fff' : '#d1d5db',
+//     })}
+//   >
+//     {label}
+//   </NavLink>
+// );
 
 const AppContent: React.FC<Props> = ({ children }) => {
   return (

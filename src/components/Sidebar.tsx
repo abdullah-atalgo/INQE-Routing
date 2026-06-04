@@ -1,9 +1,9 @@
 import React from 'react';
 import { Database, CalendarClock, LayoutDashboard, Goal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 // utils and config are intentionally not used here
 
 interface SidebarProps {
-  onMenuClick?: (view: string) => void;
   activeView?: string;
 }
 
@@ -13,8 +13,8 @@ interface MenuItem {
   id: string;
 }
 
-export default function Sidebar({ activeView, onMenuClick }: SidebarProps) {
-
+export default function Sidebar({ activeView}: SidebarProps) {
+    const navigate = useNavigate();
   const menuItems: MenuItem[] = [
     { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
     { icon: Goal, label: 'QE Goals', id: 'applications' },
@@ -41,7 +41,7 @@ export default function Sidebar({ activeView, onMenuClick }: SidebarProps) {
         {menuItems.map((item) => (
           <div
             key={item.id}
-            onClick={() => onMenuClick?.(item.id)}
+            onClick={() => {navigate(`/${item.id}`)}}
             className={`menu-item ${activeView === item.id ? 'active' : ''}`}
             role="button"
             aria-current={activeView === item.id ? 'page' : undefined}
